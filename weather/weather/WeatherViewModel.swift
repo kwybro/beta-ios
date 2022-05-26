@@ -82,14 +82,15 @@ final class WeatherViewModel: WeatherViewModelProtocol {
             WeatherWidget(type: .pressure, value: Constants.pressureUnits(pressure))
         ]
 
-        print(response)
         guard let today = response.forecast?.forecastDays?.first,
               let hours = today.hours else { return }
         let weatherUnits: [WeatherUnit] = hours.map { hour in
             guard let epochTime = hour.time,
-                  let temperature = hour.temperature else { return nil }
+                  let temperature = hour.temperature,
+                  let condition = hour.condition?.text,
+                  let weatherType = WeatherUnit.WeatherType(for: condition) else { return nil }
             let time = Helpers.epochToHour(epochTime)
-            return WeatherUnit(type: .sun,
+            return WeatherUnit(type: weatherType,
                                temperature: temperature,
                                time: time)
         }.compactMap { $0 }

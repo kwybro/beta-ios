@@ -48,13 +48,38 @@ struct WeatherUnit: Identifiable {
     }
 
     enum WeatherType: String {
-        case sun, rain, cloudy
+        case sun, rain, cloudy, fog, snow, sleet, thunder
 
         var imageName: String {
             switch self {
             case .sun: return Constants.sunImageName
             case .rain: return Constants.rainImageName
             case .cloudy: return Constants.cloudyImageName
+            case .fog: return Constants.fogImageName
+            case .snow: return Constants.snowImageName
+            case .sleet: return Constants.sleetImageName
+            case .thunder: return Constants.thunderImageName
+            }
+        }
+
+        init?(for conditionString: String) {
+            let condition = conditionString.lowercased()
+            if condition.contains("sun") {
+                self = .sun
+            } else if condition.contains("cloud") || condition.contains("overcast") {
+                self = .cloudy
+            } else if condition.contains("mist") || condition.contains("fog") {
+                self = .fog
+            } else if condition.contains("rain") || condition.contains("drizzle") {
+                self = .rain
+            } else if condition.contains("snow") || condition.contains("blizzard") || condition.contains("ice") {
+                self = .snow
+            } else if condition.contains("sleet") {
+                self = .sleet
+            } else if condition.contains("thunder") {
+                self = .thunder
+            } else {
+                return nil
             }
         }
     }
