@@ -1,5 +1,5 @@
 //
-//  weatherApp.swift
+//  Weather.swift
 //  weather
 //
 //  Created by Kyle Wybranowski on 5/26/22.
@@ -8,16 +8,16 @@
 import SwiftUI
 
 @main
-struct weatherApp: App {
+struct Weather: App {
     let persistenceController = PersistenceController.shared
 
-    var currentWeatherViewModel: CurrentWeatherViewModel {
-        CurrentWeatherViewModel()
+    var weatherViewModel: WeatherViewModel {
+        WeatherViewModel()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(currentWeatherViewModel: currentWeatherViewModel)
+            ContentView(weatherViewModel: weatherViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

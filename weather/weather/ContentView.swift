@@ -11,15 +11,16 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    var currentWeatherViewModel: CurrentWeatherViewModel
 
+    var weatherViewModel: WeatherViewModel
 
     var body: some View {
         NavigationView {
             List {
                 VStack {
-                    CurrentWeatherView(viewModel: currentWeatherViewModel)
+                    CurrentWeatherView(viewModel: weatherViewModel)
                         .navigationTitle(Constants.hometownWeather)
+                    WeatherWidgetsListView(viewModel: weatherViewModel)
                     Spacer()
                 }
             }.refreshable {

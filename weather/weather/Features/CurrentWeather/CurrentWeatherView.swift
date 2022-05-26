@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CurrentWeatherView<ViewModel: CurrentWeatherViewModelProtocol>: View {
+struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
@@ -19,7 +19,7 @@ struct CurrentWeatherView<ViewModel: CurrentWeatherViewModelProtocol>: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5) {
-                        ForEach(viewModel.loadedWeatherUnits) {
+                        ForEach(viewModel.currentWeatherUnits) {
                             WeatherUnitView(unit: $0)
                         }
                     }
