@@ -22,6 +22,11 @@
 		1B83F175283FE09600D1808B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F174283FE09600D1808B /* Constants.swift */; };
 		1B83F177283FE93900D1808B /* WeatherUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F176283FE93900D1808B /* WeatherUnitView.swift */; };
 		1B83F17B28400CD700D1808B /* WeatherWidgetsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F17A28400CD700D1808B /* WeatherWidgetsListView.swift */; };
+		1B83F17D2840144900D1808B /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F17C2840144900D1808B /* APIClient.swift */; };
+		1B83F17F284014DE00D1808B /* WeatherResponses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F17E284014DE00D1808B /* WeatherResponses.swift */; };
+		1B83F181284019B300D1808B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F180284019B300D1808B /* Network.swift */; };
+		1B83F18328401E9500D1808B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F18228401E9500D1808B /* Models.swift */; };
+		1B83F185284035CB00D1808B /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B83F184284035CB00D1808B /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +65,11 @@
 		1B83F174283FE09600D1808B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1B83F176283FE93900D1808B /* WeatherUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUnitView.swift; sourceTree = "<group>"; };
 		1B83F17A28400CD700D1808B /* WeatherWidgetsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWidgetsListView.swift; sourceTree = "<group>"; };
+		1B83F17C2840144900D1808B /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		1B83F17E284014DE00D1808B /* WeatherResponses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponses.swift; sourceTree = "<group>"; };
+		1B83F180284019B300D1808B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		1B83F18228401E9500D1808B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		1B83F184284035CB00D1808B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +180,11 @@
 			isa = PBXGroup;
 			children = (
 				1B83F174283FE09600D1808B /* Constants.swift */,
+				1B83F17C2840144900D1808B /* APIClient.swift */,
+				1B83F17E284014DE00D1808B /* WeatherResponses.swift */,
+				1B83F180284019B300D1808B /* Network.swift */,
+				1B83F18228401E9500D1808B /* Models.swift */,
+				1B83F184284035CB00D1808B /* Helpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -313,16 +328,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B83F181284019B300D1808B /* Network.swift in Sources */,
 				1B83F149283FD6A000D1808B /* weather.xcdatamodeld in Sources */,
 				1B83F17B28400CD700D1808B /* WeatherWidgetsListView.swift in Sources */,
 				1B83F146283FD6A000D1808B /* Persistence.swift in Sources */,
+				1B83F17F284014DE00D1808B /* WeatherResponses.swift in Sources */,
 				1B83F177283FE93900D1808B /* WeatherUnitView.swift in Sources */,
 				1B83F16D283FDD6D00D1808B /* WeatherWidgetView.swift in Sources */,
+				1B83F17D2840144900D1808B /* APIClient.swift in Sources */,
 				1B83F16F283FDE9B00D1808B /* CurrentWeatherView.swift in Sources */,
 				1B83F13F283FD69D00D1808B /* ContentView.swift in Sources */,
 				1B83F13D283FD69D00D1808B /* WeatherApp.swift in Sources */,
 				1B83F172283FDEBB00D1808B /* WeatherViewModel.swift in Sources */,
 				1B83F175283FE09600D1808B /* Constants.swift in Sources */,
+				1B83F185284035CB00D1808B /* Helpers.swift in Sources */,
+				1B83F18328401E9500D1808B /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,8 @@ struct WeatherWidgetsListView<ViewModel: WeatherViewModelProtocol>: View {
 
     var body: some View {
         switch viewModel.viewState {
-        case .loading: ProgressView()
+        case .failed: VStack(alignment: .center) { Text("Pull to refresh") }
+        case .loading: VStack() {}
         default:
             LazyVGrid(columns: columns, spacing: 20) {
                 ForEach(viewModel.currentWeatherWidgets, id: \.self) { data in
