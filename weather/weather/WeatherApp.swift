@@ -11,13 +11,13 @@ import SwiftUI
 struct Weather: App {
     let persistenceController = PersistenceController.shared
 
-    var currentWeatherViewModel: CurrentWeatherViewModel {
-        CurrentWeatherViewModel()
+    var weatherViewModel: WeatherViewModel {
+        WeatherViewModel()
     }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(currentWeatherViewModel: currentWeatherViewModel)
+            ContentView(weatherViewModel: weatherViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

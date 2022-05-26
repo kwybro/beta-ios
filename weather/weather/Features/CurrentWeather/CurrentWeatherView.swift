@@ -19,7 +19,7 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5) {
-                        ForEach(viewModel.loadedWeatherUnits) {
+                        ForEach(viewModel.currentWeatherUnits) {
                             WeatherUnitView(unit: $0)
                         }
                     }
