@@ -56,7 +56,8 @@ final class WeatherViewModel: WeatherViewModelProtocol {
     private func invokeGetCurrentWeather() -> AnyPublisher<WeatherResponse, Error> {
         Future() { [weak self] promise in
             guard let self = self else { return }
-            self.apiClient.getWeather(zipcode: 05404) { promise($0) }
+            self.apiClient.getWeather(latitude: 44.475883,
+                                      longitude: -73.212074) { promise($0) }
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
