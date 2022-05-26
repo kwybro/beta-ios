@@ -13,7 +13,7 @@ struct WeatherUnitView: View {
 
     var body: some View {
         VStack(alignment: .center) {
-            Text(Constants.temperatureInDegrees(unit.temperature))
+            Text(Constants.temperatureInDegrees(Int(unit.temperature)))
                 .font(Font.footnote)
                 .foregroundColor(.black)
             VStack {
