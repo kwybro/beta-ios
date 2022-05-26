@@ -11,15 +11,21 @@ import CoreData
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    @State private var location: String = "Burlington"
+    var currentWeatherViewModel: CurrentWeatherViewModel
+
 
     var body: some View {
         NavigationView {
-
-            CurrentWeatherView()
-            .navigationTitle("Hometown Weather")
+            List {
+                VStack {
+                    CurrentWeatherView(viewModel: currentWeatherViewModel)
+                        .navigationTitle(Constants.hometownWeather)
+                    Spacer()
+                }
+            }.refreshable {
+                print("Hi")
+            }
         }
-        .searchable(text: $location)
     }
 }
 
@@ -29,9 +35,3 @@ private let itemFormatter: DateFormatter = {
     formatter.timeStyle = .medium
     return formatter
 }()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
-}

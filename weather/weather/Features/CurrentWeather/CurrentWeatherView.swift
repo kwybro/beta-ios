@@ -7,19 +7,26 @@
 
 import SwiftUI
 
-struct CurrentWeatherView: View {
-    var body: some View {
-        ScrollView(.vertical) {
-            Widget(title: "Rainy", subtitle: "6:00PM")
-            Widget(title: "Partially Cloudy", subtitle: "6:30PM")
-            Widget(title: "Sunny", subtitle: "7:00PM")
-            Spacer().frame(maxWidth: .infinity)
-        }
-    }
-}
+struct CurrentWeatherView<ViewModel: CurrentWeatherViewModelProtocol>: View {
+    @ObservedObject var viewModel: ViewModel
 
-struct CurrentWeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        CurrentWeatherView()
+    var body: some View {
+        switch viewModel.viewState {
+        case .loading: ProgressView()
+        default:
+            VStack {
+                Text(Constants.current)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 5) {
+                        ForEach(viewModel.loadedWeatherUnits) {
+                            WeatherUnitView(unit: $0)
+                        }
+                    }
+                }
+            }
+            .padding([.top, .bottom])
+        }
+
     }
 }
