@@ -86,6 +86,7 @@ final class WeatherViewModel: WeatherViewModelProtocol {
               let hours = today.hours else { return }
         let weatherUnits: [WeatherUnit] = hours.map { hour in
             guard let epochTime = hour.time,
+                  Helpers.isTimeValid(epochTime),
                   let temperature = hour.temperature,
                   let condition = hour.condition?.text,
                   let weatherType = WeatherUnit.WeatherType(for: condition) else { return nil }
