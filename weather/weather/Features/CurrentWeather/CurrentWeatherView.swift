@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CurrentWeatherView<ViewModel: CurrentWeatherViewModelProtocol>: View {
+struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {

@@ -8,12 +8,12 @@
 import Combine
 import SwiftUI
 
-protocol CurrentWeatherViewModelProtocol: ObservableObject {
-    var viewState: CurrentWeatherViewState { get }
+protocol WeatherViewModelProtocol: ObservableObject {
+    var viewState: WeatherViewState { get }
     var loadedWeatherUnits: [WeatherUnit] { get }
 }
 
-enum CurrentWeatherViewState {
+enum WeatherViewState {
     case success
     case loading
     case failed
@@ -21,7 +21,7 @@ enum CurrentWeatherViewState {
 }
 
 
-protocol CurrentWeatherDependency {
+protocol WeatherDependency {
     // [KW] Uncomment when ready for APIClient
 //    var apiClient: APIClient { get }
 }
@@ -48,11 +48,11 @@ struct WeatherUnit: Identifiable {
     let time: String
 }
 
-final class CurrentWeatherViewModel: CurrentWeatherViewModelProtocol {
+final class CurrentWeatherViewModel: WeatherViewModelProtocol {
     // [KW] Uncomment when ready for APIClient
 //    private let dependency: CurrentWeatherDependency
 
-    @Published private(set) var viewState: CurrentWeatherViewState = .initial
+    @Published private(set) var viewState: WeatherViewState = .initial
     // [KW] Source from APIClient
     @Published var loadedWeatherUnits: [WeatherUnit] = [
         WeatherUnit(type: .rain,
