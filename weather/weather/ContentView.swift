@@ -24,15 +24,11 @@ struct ContentView: View {
                     Spacer()
                 }
             }.refreshable {
-                print("Hi")
+                weatherViewModel.getWeather()
+            }.onAppear {
+                weatherViewModel.getWeather()
             }
         }
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
