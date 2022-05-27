@@ -18,6 +18,8 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
             VStack {
                 Text(viewModel.cityAndState)
                     .font(Font.title3)
+                Text(viewModel.lastUpdatedDate)
+                    .font(Font.caption2)
                     .padding(.bottom)
                 Text(Constants.current)
                     .font(Font.caption)
