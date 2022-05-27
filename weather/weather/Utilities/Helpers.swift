@@ -20,13 +20,27 @@ public enum Helpers {
         let timeInterval = TimeInterval(epoch)
         let date = Date(timeIntervalSince1970: timeInterval)
 
-        let itemFormatter: DateFormatter = {
+        let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
             formatter.dateFormat = "hh a"
             return formatter
         }()
 
-        return itemFormatter.string(from: date)
+        return dateFormatter.string(from: date)
+    }
+
+    public static func epochToDate(_ epoch: Double) -> String {
+        let timeInterval = TimeInterval(epoch)
+        let date = Date(timeIntervalSince1970: timeInterval)
+
+        let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            return formatter
+        }()
+
+        return dateFormatter.string(from: date)
     }
 }
 

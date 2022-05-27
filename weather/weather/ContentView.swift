@@ -9,8 +9,6 @@ import CoreData
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
 
     var weatherViewModel: WeatherViewModel
 
@@ -28,5 +26,4 @@ struct ContentView: View {
             }
         }
     }
-
-//    private func addItem() {
+}

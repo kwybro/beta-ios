@@ -15,6 +15,7 @@ protocol WeatherViewModelProtocol: ObservableObject {
     var currentWeatherWidgets: [WeatherWidget] { get }
     var locationStatus: CLAuthorizationStatus { get }
     var cityAndState: String { get }
+    var lastUpdatedDate: String { get }
 
     func getWeather()
 }
@@ -33,11 +34,12 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     private var locationManager: CLLocationManager = .init()
     private var geocoder: CLGeocoder = .init()
 
+    @AppStorage("cityAndState") var cityAndState: String = ""
+    @AppStorage("lastUpdatedDate") var lastUpdatedDate: String = ""
     @Published var locationStatus: CLAuthorizationStatus = .notDetermined
-    @Published var cityAndState: String = ""
     @Published private(set) var viewState: WeatherViewState = .initial
-    @Published var currentWeatherUnits: [WeatherUnit] = []
-    @Published var currentWeatherWidgets: [WeatherWidget] = []
+    @AppStorage("currentWeatherUnits") var currentWeatherUnits: [WeatherUnit] = []
+    @AppStorage("currentWeatherWidgets") var currentWeatherWidgets: [WeatherWidget] = []
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -77,7 +79,8 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     }
 
     private func buildWeatherViewData(from response: WeatherResponse) {
-        guard let precipitation = response.current?.precipitation,
+        guard let localTime = response.location?.localTime,
+              let precipitation = response.current?.precipitation,
               let humidity = response.current?.humidity,
               let uvIndex = response.current?.uvIndex,
               let windSpeed = response.current?.windSpeed,
@@ -111,6 +114,8 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
         }.compactMap { $0 }
 
         currentWeatherUnits = weatherUnits
+
+        lastUpdatedDate = Helpers.epochToDate(localTime)
     }
 }
 
