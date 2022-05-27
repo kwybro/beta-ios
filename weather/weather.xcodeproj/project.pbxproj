@@ -66,6 +66,8 @@
 		1B83F180284019B300D1808B /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		1B83F18228401E9500D1808B /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		1B83F184284035CB00D1808B /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		1B83F1882841339D00D1808B /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		1B83F189284133FA00D1808B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,8 @@
 		1B83F13B283FD69D00D1808B /* weather */ = {
 			isa = PBXGroup;
 			children = (
+				1B83F189284133FA00D1808B /* Info.plist */,
+				1B83F1882841339D00D1808B /* Config.xcconfig */,
 				1B83F173283FE09100D1808B /* Utilities */,
 				1B83F16B283FDD6300D1808B /* Features */,
 				1B83F171283FDEBB00D1808B /* WeatherViewModel.swift */,
@@ -481,6 +485,7 @@
 		};
 		1B83F163283FD6A000D1808B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B83F1882841339D00D1808B /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -490,6 +495,7 @@
 				DEVELOPMENT_TEAM = 95ABRKSUG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = weather/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to provide you local weather information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -511,6 +517,7 @@
 		};
 		1B83F164283FD6A000D1808B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B83F1882841339D00D1808B /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -520,6 +527,7 @@
 				DEVELOPMENT_TEAM = 95ABRKSUG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = weather/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses your location to provide you local weather information.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

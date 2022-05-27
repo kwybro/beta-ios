@@ -67,12 +67,16 @@ final class APIClientImp: APIClient {
                              parameters: [URLQueryItem],
                              method: HTTPMethod) throws -> URLRequest {
         let baseURL = Constants.baseWeatherURL
-        let apiKey = URLQueryItem(name: "key", value: "0aa8647988eb44fcbec173942222605")
+        // :(
+        let apiKey = (Bundle.main.infoDictionary?["API_KEY"] as! String)
+            .trimmingCharacters(in: .init(charactersIn: "\""))
+            .trimmingCharacters(in: .init(charactersIn: "\\"))
+        let key = URLQueryItem(name: "key", value: apiKey)
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = baseURL
         urlComponents.path = "/v1/\(path)"
-        urlComponents.queryItems = [apiKey] + parameters
+        urlComponents.queryItems = [key] + parameters
 
         guard let url = urlComponents.url else {
             throw(Error.invalidURL)

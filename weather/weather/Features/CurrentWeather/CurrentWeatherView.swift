@@ -12,7 +12,7 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
 
     var body: some View {
         switch viewModel.viewState {
-        case .failed: VStack(alignment: .center) { Text("Failed to load 😭.") }
+        case .failed: VStack(alignment: .center) { Text("Failed to load 😭.").foregroundColor(.black) }
         case .loading: VStack(alignment: .center) { ProgressView() }
         case .ready, .initial, .failedNoLocation:
             VStack {
