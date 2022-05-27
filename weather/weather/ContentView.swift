@@ -5,8 +5,8 @@
 //  Created by Kyle Wybranowski on 5/26/22.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
@@ -25,9 +25,8 @@ struct ContentView: View {
                 }
             }.refreshable {
                 weatherViewModel.getWeather()
-            }.onAppear {
-                weatherViewModel.getWeather()
             }
         }
     }
 
+//    private func addItem() {

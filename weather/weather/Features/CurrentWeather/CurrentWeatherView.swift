@@ -16,7 +16,11 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
         case .loading: VStack(alignment: .center) { ProgressView() }
         default:
             VStack {
+                Text(viewModel.cityAndState)
+                    .font(Font.title3)
+                    .padding(.bottom)
                 Text(Constants.current)
+                    .font(Font.caption)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5) {

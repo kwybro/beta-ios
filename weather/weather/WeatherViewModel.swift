@@ -5,6 +5,7 @@
 //  Created by Kyle Wybranowski on 5/26/22.
 //
 
+import CoreLocation
 import Combine
 import SwiftUI
 
@@ -12,6 +13,8 @@ protocol WeatherViewModelProtocol: ObservableObject {
     var viewState: WeatherViewState { get }
     var currentWeatherUnits: [WeatherUnit] { get }
     var currentWeatherWidgets: [WeatherWidget] { get }
+    var locationStatus: CLAuthorizationStatus { get }
+    var cityAndState: String { get }
 
     func getWeather()
 }
@@ -21,19 +24,29 @@ enum WeatherViewState {
     case loading
     case failed
     case initial
+    case failedNoLocation
 }
 
-final class WeatherViewModel: WeatherViewModelProtocol {
+final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     private let apiClient: APIClient
-
     private var cancellables: Set<AnyCancellable> = []
+    private var locationManager: CLLocationManager = .init()
+    private var geocoder: CLGeocoder = .init()
 
+    @Published var locationStatus: CLAuthorizationStatus = .notDetermined
+    @Published var cityAndState: String = ""
     @Published private(set) var viewState: WeatherViewState = .initial
     @Published var currentWeatherUnits: [WeatherUnit] = []
     @Published var currentWeatherWidgets: [WeatherWidget] = []
 
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+
     init(apiClient: APIClient) {
         self.apiClient = apiClient
+        super.init()
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
     }
 
     func getWeather() {
@@ -56,7 +69,8 @@ final class WeatherViewModel: WeatherViewModelProtocol {
     private func invokeGetCurrentWeather() -> AnyPublisher<WeatherResponse, Error> {
         Future() { [weak self] promise in
             guard let self = self else { return }
-            self.apiClient.getWeather(zipcode: 05404) { promise($0) }
+            self.apiClient.getWeather(latitude: self.latitude,
+                                      longitude: self.longitude) { promise($0) }
         }
         .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
@@ -97,5 +111,37 @@ final class WeatherViewModel: WeatherViewModelProtocol {
         }.compactMap { $0 }
 
         currentWeatherUnits = weatherUnits
+    }
+}
+
+extension WeatherViewModel: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        locationStatus = status
+        if status == .authorizedWhenInUse {
+            manager.startUpdatingLocation()
+        }
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = manager.location else {
+                  viewState = .failedNoLocation
+                  return
+        }
+        self.latitude = location.coordinate.latitude
+        self.longitude = location.coordinate.longitude
+        getWeather()
+
+        geocoder.reverseGeocodeLocation(location) { [weak self] (placemarks, error) -> Void in
+            if error == nil {
+                guard let self = self,
+                      let placemarks = placemarks,
+                      let firstPlacemark = placemarks.first,
+                      let city = firstPlacemark.locality,
+                      let state = firstPlacemark.administrativeArea else {
+                          return
+                      }
+                self.cityAndState = "\(city), \(state)"
+            }
+        }
     }
 }

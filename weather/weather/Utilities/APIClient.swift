@@ -9,7 +9,8 @@ import Foundation
 
 internal protocol APIClient {
     func getWeather(
-        zipcode: Int,
+        latitude: Double,
+        longitude: Double,
         completion: @escaping (Result<WeatherResponse, Swift.Error>) -> Void
     )
 }
@@ -29,11 +30,13 @@ final class APIClientImp: APIClient {
     }
 
     func getWeather(
-        zipcode: Int,
+        latitude: Double,
+        longitude: Double,
         completion: @escaping (Result<WeatherResponse, Swift.Error>) -> Void) {
             do {
+                let latlong = "\(latitude),\(longitude)"
                 let request = try makeRequest(path: "forecast.json",
-                                              parameters: [.init(name: "q", value: "05404"),
+                                              parameters: [.init(name: "q", value: latlong),
                                                            .init(name: "days", value: "1")],
                                               method: .get)
                 network.executeRequest(request) { result in
@@ -69,7 +72,7 @@ final class APIClientImp: APIClient {
         urlComponents.scheme = "https"
         urlComponents.host = baseURL
         urlComponents.path = "/v1/\(path)"
-        urlComponents.queryItems = parameters + [apiKey]
+        urlComponents.queryItems = [apiKey] + parameters
 
         guard let url = urlComponents.url else {
             throw(Error.invalidURL)
