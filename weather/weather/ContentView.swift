@@ -25,8 +25,6 @@ struct ContentView: View {
                 }
             }.refreshable {
                 weatherViewModel.getWeather()
-            }.onAppear {
-                weatherViewModel.getWeather()
             }
         }
     }
