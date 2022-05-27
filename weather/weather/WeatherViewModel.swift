@@ -34,10 +34,10 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     private var locationManager: CLLocationManager = .init()
     private var geocoder: CLGeocoder = .init()
 
+    @AppStorage("cityAndState") var cityAndState: String = ""
+    @AppStorage("lastUpdatedDate") var lastUpdatedDate: String = ""
     @Published var locationStatus: CLAuthorizationStatus = .notDetermined
-    @Published var cityAndState: String = ""
     @Published private(set) var viewState: WeatherViewState = .initial
-    @Published var lastUpdatedDate: String = ""
     @Published var currentWeatherUnits: [WeatherUnit] = []
     @Published var currentWeatherWidgets: [WeatherWidget] = []
 
