@@ -8,29 +8,53 @@
 import XCTest
 @testable import weather
 
-class weatherTests: XCTestCase {
+class WeatherTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUpWithError() throws {}
+
+    override func tearDownWithError() throws {}
+
+    func testEpochToHourHelper() {
+        // Given
+        let epoch: Double = 1653665067
+
+        // When
+        let hour = Helpers.epochToHour(epoch)
+
+        // Then
+        XCTAssertEqual(hour, "11 AM")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testEpochToDateHelper() {
+        // Given
+        let epoch: Double = 1653665067
+
+        // When
+        let date = Helpers.epochToDate(epoch)
+
+        // Then
+        XCTAssertEqual(date, "May 27, 2022 at 11:24 AM")
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testIsTimeValidHelper_true() {
+        // Given
+        let epoch: Double = 1653665067
+
+        // When
+        let isTimeValid = Helpers.isTimeValid(epoch)
+
+        // Then
+        XCTAssertTrue(isTimeValid)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    func testIsTimeValidHelper_false() {
+        // Given
+        let epoch: Double = 1653661000
 
+        // When
+        let isTimeValid = Helpers.isTimeValid(epoch)
+
+        // Then
+        XCTAssertFalse(isTimeValid)
+    }
 }
