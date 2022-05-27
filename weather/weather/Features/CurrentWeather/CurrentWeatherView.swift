@@ -14,7 +14,7 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
         switch viewModel.viewState {
         case .failed: VStack(alignment: .center) { Text("Failed to load 😭.") }
         case .loading: VStack(alignment: .center) { ProgressView() }
-        default:
+        case .ready, .initial, .failedNoLocation:
             VStack {
                 Text(viewModel.cityAndState)
                     .font(Font.title3)

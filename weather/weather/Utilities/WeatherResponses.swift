@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct WeatherResponse: Decodable {
+struct WeatherResponse: Codable {
     let location: Location?
     let current: Current?
     let forecast: Forecast?
 }
 
 extension WeatherResponse {
-    struct Location: Decodable {
+    struct Location: Codable {
         private enum CodingKeys: String, CodingKey {
             case name
             case region
@@ -34,7 +34,7 @@ extension WeatherResponse {
         let localTime: Double?
     }
 
-    struct Current: Decodable {
+    struct Current: Codable {
         private enum CodingKeys: String, CodingKey {
             case humidity
             case uvIndex = "uv"
@@ -52,7 +52,7 @@ extension WeatherResponse {
         let windSpeed: Double?
     }
 
-    struct Forecast: Decodable {
+    struct Forecast: Codable {
         private enum CodingKeys: String, CodingKey {
             case forecastDays = "forecastday"
         }
@@ -62,7 +62,7 @@ extension WeatherResponse {
 }
 
 extension WeatherResponse.Forecast {
-    struct ForecastDay: Decodable {
+    struct ForecastDay: Codable {
         private enum CodingKeys: String, CodingKey {
             case date = "date_epoch"
             case hours = "hour"
@@ -74,7 +74,7 @@ extension WeatherResponse.Forecast {
 }
 
 extension WeatherResponse.Forecast.ForecastDay {
-    struct ForecastHour: Decodable {
+    struct ForecastHour: Codable {
         private enum CodingKeys: String, CodingKey {
             case time = "time_epoch"
             case temperature = "temp_f"
@@ -85,7 +85,7 @@ extension WeatherResponse.Forecast.ForecastDay {
         let temperature: Double?
         let condition: Condition?
 
-        struct Condition: Decodable {
+        struct Condition: Codable {
             let text: String?
         }
     }

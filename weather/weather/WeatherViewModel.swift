@@ -38,8 +38,8 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     @AppStorage("lastUpdatedDate") var lastUpdatedDate: String = ""
     @Published var locationStatus: CLAuthorizationStatus = .notDetermined
     @Published private(set) var viewState: WeatherViewState = .initial
-    @Published var currentWeatherUnits: [WeatherUnit] = []
-    @Published var currentWeatherWidgets: [WeatherWidget] = []
+    @AppStorage("currentWeatherUnits") var currentWeatherUnits: [WeatherUnit] = []
+    @AppStorage("currentWeatherWidgets") var currentWeatherWidgets: [WeatherWidget] = []
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
