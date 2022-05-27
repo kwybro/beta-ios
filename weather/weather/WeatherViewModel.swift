@@ -34,6 +34,10 @@ final class WeatherViewModel: NSObject, WeatherViewModelProtocol {
     private var locationManager: CLLocationManager = .init()
     private var geocoder: CLGeocoder = .init()
 
+    /*
+     Credit:
+     https://www.hackingwithswift.com/books/ios-swiftui/storing-user-settings-with-userdefaults
+     */
     @AppStorage("cityAndState") var cityAndState: String = ""
     @AppStorage("lastUpdatedDate") var lastUpdatedDate: String = ""
     @Published var locationStatus: CLAuthorizationStatus = .notDetermined
