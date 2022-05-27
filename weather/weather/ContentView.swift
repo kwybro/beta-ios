@@ -18,6 +18,7 @@ struct ContentView: View {
                 VStack {
                     CurrentWeatherView(viewModel: weatherViewModel)
                         .navigationTitle(Constants.hometownWeather)
+                        .foregroundColor(Color.pink)
                     WeatherWidgetsListView(viewModel: weatherViewModel)
                     Spacer()
                 }

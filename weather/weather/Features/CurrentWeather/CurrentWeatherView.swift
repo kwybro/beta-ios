@@ -18,11 +18,14 @@ struct CurrentWeatherView<ViewModel: WeatherViewModelProtocol>: View {
             VStack {
                 Text(viewModel.cityAndState)
                     .font(Font.title3)
+                    .foregroundColor(.black)
                 Text(viewModel.lastUpdatedDate)
                     .font(Font.caption2)
                     .padding(.bottom)
+                    .foregroundColor(.black)
                 Text(Constants.current)
                     .font(Font.caption)
+                    .foregroundColor(.black)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5) {
